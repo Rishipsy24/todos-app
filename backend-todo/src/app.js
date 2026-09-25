@@ -6,10 +6,18 @@ const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 
 const app = express();
 
-// Middleware
+// CORS
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://todos-d50msx1kg-rishipsy24.vercel.app'
+];
+
 app.use(cors({
-  origin: process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace('/api', '') : 'http://localhost:3000'
+  origin: allowedOrigins,
+  credentials: true
 }));
+
 app.use(express.json());
 
 // Routes
@@ -18,7 +26,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api', (req, res) => {
-  res.status(200).json({ success: true, message: 'Welcome to the Todo API' });
+  res.status(200).json({
+    success: true,
+    message: 'Welcome to the Todo API'
+  });
 });
 
 app.use('/api/auth', authRoutes);
