@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const res = await api.get('/auth/me');
+          const res = await api.get('/api/auth/me');
           setUser(res.data.data);
         } catch (error) {
           console.error('Failed to fetch user', error);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password) => {
-    await api.post('/auth/register', { name, email, password });
+    await api.post('/api/auth/register', { name, email, password });
   };
 
   const logout = () => {
