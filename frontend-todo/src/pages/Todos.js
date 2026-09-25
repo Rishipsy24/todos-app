@@ -11,7 +11,7 @@ const Todos = () => {
   const fetchTodos = async () => {
     try {
       setLoading(true);
-      const res = await api.get('/todos');
+      const res = await api.get('/api/todos');
       setTodos(res.data.data);
       setError('');
     } catch (err) {
@@ -27,7 +27,7 @@ const Todos = () => {
 
   const handleCreateTodo = async (todoData) => {
     try {
-      const res = await api.post('/todos', todoData);
+      const res = await api.post('/api/todos', todoData);
       setTodos([res.data.data, ...todos]);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to create todo');
@@ -36,7 +36,7 @@ const Todos = () => {
 
   const handleUpdateTodo = async (id, updateData) => {
     try {
-      const res = await api.put(`/todos/${id}`, updateData);
+      const res = await api.put(`/api/todos/${id}`, updateData);
       setTodos(todos.map(todo => todo.id === id ? res.data.data : todo));
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to update todo');
@@ -45,7 +45,7 @@ const Todos = () => {
 
   const handleDeleteTodo = async (id) => {
     try {
-      await api.delete(`/todos/${id}`);
+      await api.delete(`/api/todos/${id}`);
       setTodos(todos.filter(todo => todo.id !== id));
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to delete todo');
@@ -59,9 +59,9 @@ const Todos = () => {
       </div>
       <TodoForm onSubmit={handleCreateTodo} />
       <hr />
-      <TodoList 
-        todos={todos} 
-        onUpdate={handleUpdateTodo} 
+      <TodoList
+        todos={todos}
+        onUpdate={handleUpdateTodo}
         onDelete={handleDeleteTodo}
         loading={loading}
         error={error}
