@@ -104,12 +104,13 @@ PORT=5000
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_SERVICE_ROLE_KEY=your_secret_service_role_key
 JWT_SECRET=your_jwt_secret
+FRONTEND_URLS=http://localhost:3000,https://todos-app-pearl-beta.vercel.app
 ```
 
 ### Frontend (`frontend-todo/.env`)
 Create a `.env` file from the `.env.example`:
 ```env
-REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_URL=http://localhost:5000
 ```
 
 ## Backend Installation
@@ -141,6 +142,12 @@ npm start
 ```
 
 The frontend will run at `http://localhost:3000` and the backend will run at `http://localhost:5000`.
+
+## Render and Vercel deployment
+
+On **Render**, set `FRONTEND_URLS` to the full Vercel site URL (for example, `https://todos-app-pearl-beta.vercel.app`) and redeploy the backend. Do not include a trailing slash.
+
+On **Vercel**, set `REACT_APP_API_URL` to the Render backend origin (for example, `https://todos-app-uuwf.onrender.com`) and redeploy the frontend. Do not append `/api`, because the frontend already includes `/api` in each request path.
 
 ## API Documentation
 

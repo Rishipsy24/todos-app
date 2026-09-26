@@ -7,14 +7,24 @@ const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 const app = express();
 
 // CORS
-const allowedOrigins = [
+const defaultAllowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://todos-app-rishipsy24.vercel.app'
+  'https://todos-app-rishipsy24.vercel.app',
+  'https://todos-app-pearl-beta.vercel.app'
 ];
+const allowedOrigins = process.env.FRONTEND_URLS
+  ? process.env.FRONTEND_URLS.split(',').map((origin) => origin.trim()).filter(Boolean)
+  : defaultAllowedOrigins;
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin(origin, callback) {
+    // Requests without an Origin header (health checks, curl) are safe to allow.
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
   credentials: true
 }));
 
