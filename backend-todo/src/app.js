@@ -10,8 +10,7 @@ const app = express();
 const defaultAllowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://todos-app-rishipsy24.vercel.app',
-  'https://todos-app-pearl-beta.vercel.app'
+  'https://todos-app-omega-lake.vercel.app/',
 ];
 const allowedOrigins = process.env.FRONTEND_URLS
   ? process.env.FRONTEND_URLS.split(',').map((origin) => origin.trim()).filter(Boolean)
