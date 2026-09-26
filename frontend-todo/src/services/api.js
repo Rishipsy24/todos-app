@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-// Keep the API location configurable.  The previous hard-coded Render URL is
-// unavailable, so every sign-in/sign-up request was sent to a dead server
-// instead of the backend configured for this project.
-const API_URL = (process.env.REACT_APP_API_URL || 'http://localhost:5000')
+// Keep the API location configurable while preserving a safe production
+// fallback for deployments where Vercel has not been given the variable yet.
+const API_URL = (process.env.REACT_APP_API_URL || 'https://todos-app-uuwf.onrender.com')
   .replace(/\/$/, '');
 
 const api = axios.create({
