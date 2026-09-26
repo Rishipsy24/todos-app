@@ -147,7 +147,7 @@ The frontend will run at `http://localhost:3000` and the backend will run at `ht
 
 On **Render**, set `FRONTEND_URLS` to the full Vercel site URL (for example, `https://todos-app-pearl-beta.vercel.app`) and redeploy the backend. Do not include a trailing slash.
 
-On **Vercel**, set `REACT_APP_API_URL` to the Render backend origin (for example, `https://todos-app-uuwf.onrender.com`) and redeploy the frontend. Do not append `/api`, because the frontend already includes `/api` in each request path.
+On **Vercel**, set `REACT_APP_API_URL` to the Render backend origin (for example, `https://todos-app-8za0.onrender.com`) and redeploy the frontend. Do not append `/api`, because the frontend already includes `/api` in each request path.
 
 ## API Documentation
 
