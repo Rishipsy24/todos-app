@@ -10,16 +10,19 @@ const app = express();
 const defaultAllowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://todos-app-omega-lake.vercel.app/',
+  'https://todos-app-pearl-beta.vercel.app',
+  'https://todos-app-omega-lake.vercel.app'
 ];
 const allowedOrigins = process.env.FRONTEND_URLS
-  ? process.env.FRONTEND_URLS.split(',').map((origin) => origin.trim()).filter(Boolean)
+  ? process.env.FRONTEND_URLS.split(',')
+    .map((origin) => origin.trim().replace(/\/$/, ''))
+    .filter(Boolean)
   : defaultAllowedOrigins;
 
 app.use(cors({
   origin(origin, callback) {
     // Requests without an Origin header (health checks, curl) are safe to allow.
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
       return callback(null, true);
     }
     return callback(new Error(`CORS blocked for origin: ${origin}`));
